@@ -43,7 +43,7 @@ public class CalcV2 {
 				continue;
 			}
 		}
-		
+		// print out the resulting lists
 		System.out.println(numberList);
 		System.out.println(operatorList);		
 	}
@@ -51,13 +51,12 @@ public class CalcV2 {
 	public static void calculateResult() {
 		while (operatorList.size()>0) {
 			// find priority operations, calculate and put the results in a new list
-			// find the first priority operator (x or /), need to search for a x or a /, if one found stop and calculate, if not, use the first operator
+			// find the first priority operator (x or /), if one found stop and calculate, if not, use the first operator
 			int index = 0;
 			for(String operatorInList : operatorList) {
 				// if it's a priority operator, we use it for the next calculation
 				// if not, we keep looking in the list 
 				if ("*".equals(operatorInList) || "/".equals(operatorInList)) {
-
 					break;
 				}
 				// if we reach the last element without finding any priority operator, we use the first element
@@ -68,7 +67,7 @@ public class CalcV2 {
 				index++;
 			}
 			// calculate and place the result at the index
-			// get the values to use
+			// get the values to use for the calculation
 			int result = 0;
 			int firstValue = numberList.get(index);
 			int secondValue = numberList.get(index+1);
@@ -78,17 +77,12 @@ public class CalcV2 {
 			else if("*".equals(operator)) {result = firstValue * secondValue;}
 			else if("/".equals(operator)) {result = firstValue / secondValue;}
 
-			// move the other values
-			// set the result at the index position
+			// remove the values used and set the result at the index position
 			numberList.remove(index);
 			numberList.set(index, result);
 			operatorList.remove(index);
-
-//			System.out.println(index);
-//			System.out.println(numberList);
-//			System.out.println(operatorList);
 		}
-		
+		// print out the result
 		System.out.println(numberList.get(0));
 	}
 	
